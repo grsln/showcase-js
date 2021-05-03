@@ -19,6 +19,10 @@ window.onload = function () {
     );
   const spinner = document.getElementById("spinner");
   if (spinner) spinner.style.display = "flex";
+  document.getElementById("subj").selectedIndex = filterSubj;
+  document.getElementById("genre").selectedIndex = filterGenre;
+  document.getElementById("grade").selectedIndex = filterGrade;
+  document.getElementById("search").value = filterText;
 };
 function succesRequest(result) {
   if (result.result === "Ok") {
