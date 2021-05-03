@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="img/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Витрина" />
+    <link rel="apple-touch-icon" href="img/logo192.png" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Витрина</title>
+</head>
+
+<body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div class="root">
+        <header>
+            <nav class="navbar navbar-expand-xl navbar-light bg-light">
+                <div class="container-fluid">
+                    <button id="toggler" class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation" onclick="handleToggleClick(this)">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a class="navbar-brand logo-h" href="https://www.imumk.ru/"><img src="img/logo.svg"
+                            alt="Облако знаний" /></a>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="https://www.imumk.ru/pages/about">О проекте</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://www.imumk.ru/news">Новости</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://www.imumk.ru/feedback">Помощь</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://www.imumk.ru/pages/apps">Скачать</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class='buttons-wrap'>
+                        <a class="btn btn-primary" href="https://www.imumk.ru/showcase" role="button">Каталог</a>
+                        <a class="btn btn-primary" href="https://school.imumk.ru/regpin.html"
+                            role="button">Активация</a>
+                        <a class="btn btn-primary" href="https://school.imumk.ru/" role="button">Вход</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main id='main'>
+            <h1 class="title">Витрина</h1>
+            <form class="courses">
+                <select id="subj" class="form-select" onchange="handleChangeSubject(this)">
+                    <option selected value="">Все предметы</option>
+                    <option>Алгебра</option>
+                    <option>Английский язык</option>
+                    <option>Биология</option>
+                    <option>География</option>
+                    <option>Геометрия</option>
+                    <option>Демо-версия</option>
+                    <option>Информатика</option>
+                    <option>История</option>
+                    <option>Литература</option>
+                    <option>Математика</option>
+                    <option>Обществознание</option>
+                    <option>Окружающий мир</option>
+                    <option>Робототехника</option>
+                    <option>Русский язык</option>
+                    <option>Физика</option>
+                    <option>Химия</option>
+                </select>
+                <select id="genre" class="form-select" onchange="handleChangeGenre(this)">
+                    <option selected value="">Все жанры</option>
+                    <option>Демо</option>
+                    <option>Задачник</option>
+                    <option>Подготовка к ВПР</option>
+                    <option>Подготовка к ЕГЭ</option>
+                    <option>Рабочая тетрадь</option>
+                </select>
+                <select id="grade" class="form-select" onchange="handleChangeGrade(this)">
+                    <option selected value="">Все классы</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                </select>
+                <input class="form-control" type="text" id='search' placeholder="Поиск"
+                    oninput="handleChangeText(this)" />
+            </form>
+            <div id="price-toggle" class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                <label class="btn btn-outline-primary" for="btnradio1">Рубли</label>
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio2">Бонусы</label>
+            </div>
+
+            <div id='spinner' class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <h1 id='result-title'>Результаты поиска:</h1>
+            <div id='empty-course'>Курсы не найдены</div>
+            <div id="template" class="card">
+                <div class="image-wrap">
+                    <img id='cardImage' src='' alt='' title='image' />
+                </div>
+                <div class="info">
+                    <p class="info-text info-title"></p>
+                    <p class="info-text info-grade"></p>
+                    <p class="info-text info-genre"></p>
+                    <p class="info-text info-detail">
+                        <a href=''>Подробнее</a>
+                    </p>
+                    <p class="info-text info-test">
+                        <a href='' class="price">
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div id="cards-wrap">
+            </div>
+        </main>
+        <footer>
+            <div class="footer-line">
+                <div class="legal">
+                    <p>
+                        © <a href="http://physiconlab.ru">ООО «Физикон Лаб»</a>, 2013—2021
+                    </p>
+                    <p>
+                        <a rel="nofollow" href="https://www.imumk.ru/privacy">
+                            Пользовательское соглашение
+                        </a>
+                    </p>
+                </div>
+                <ul class="social">
+                    <li class="social-item">
+                        <a href="https://twitter.com/oblako_znanij" class="social-link twitter">
+                            Twitter
+                        </a>
+                    </li>
+                    <li class="social-item">
+                        <a href="http://vk.com/oblako_znanij" class="social-link vkontakte">
+                            Vkontakte
+                        </a>
+                    </li>
+                    <li class="social-item">
+                        <a href="https://www.facebook.com/oblakoznanij/?ref=oblako" class="social-link facebook">
+                            Facebook
+                        </a>
+                    </li>
+                    <li class="social-item">
+                        <a href="https://www.instagram.com/oblako_znanij/" class="social-link instagram">
+                            Instagram
+                        </a>
+                    </li>
+                </ul>
+                <div class="legal">
+                    <p>
+                        <a href="tel:+74987446757">+7 (499) 322-07-57</a>
+                        <a href="mailto:info@imumk.ru">info@imumk.ru</a>
+                    </p>
+                    <p>
+                        <a rel="nofollow" href="https://www.imumk.ru/regulations">
+                            Правила пользования сайтом
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
